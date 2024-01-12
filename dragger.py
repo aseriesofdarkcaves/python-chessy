@@ -2,6 +2,7 @@ import pygame
 
 from const import *
 
+
 class Dragger:
 
     def __init__(self):
@@ -29,7 +30,7 @@ class Dragger:
     # other methods
 
     def update_mouse(self, pos):
-        self.mouseX, self.mouseY = pos # (xcor, ycor)
+        self.mouseX, self.mouseY = pos  # (xcor, ycor)
 
     def save_initial(self, pos):
         self.initial_row = pos[1] // SQSIZE
