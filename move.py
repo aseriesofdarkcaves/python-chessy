@@ -6,8 +6,8 @@ class Move:
 
     def __str__(self):
         s = ''
-        s += f'({self.initial.col}, {self.initial.row})'
-        s += f' -> ({self.final.col}, {self.final.row})'
+        s += f'({self.initial.file}, {self.initial.rank})'
+        s += f' -> ({self.final.file}, {self.final.rank})'
         return s
 
     def __eq__(self, other):

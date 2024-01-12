@@ -1,20 +1,41 @@
 import os
 
+from constants import *
+
 
 class Piece:
     def __init__(self, name, color, value, texture=None, texture_rect=None):
+        """
+        :param name: the name of the piece
+        :param color: the colour of the piece
+        :param value: the value of the piece
+        :param texture: the texture to use when representing the piece
+        :param texture_rect: TODO: figure this out and document it
+        """
         self.name = name
         self.color = color
+        # ternary assignment statement in python
+        # white pieces have positive values, black have negative values
         value_sign = 1 if color == 'white' else -1
+        # this normalises piece values so that they're always positive
         self.value = value * value_sign
+        # a list of moves made by the piece so far
         self.moves = []
+        # boolean to track whether a piece has been moved already or not
         self.moved = False
+        # the texture to use when representing the piece
         self.texture = texture
         self.set_texture()
         self.texture_rect = texture_rect
 
     def set_texture(self, size=80):
-        self.texture = os.path.join(f'assets/images/imgs-{size}px/{self.color}_{self.name}.png')
+        """
+        Sets the texture to use when representing the piece.
+
+        :param size: the square size of the texture
+        :return: the path to the texture
+        """
+        self.texture = os.path.join(f'{TEXTURES_PATH}/{size}px/{self.color}_{self.name}.png')
 
     def add_move(self, move):
         self.moves.append(move)
@@ -25,6 +46,8 @@ class Piece:
 
 class Pawn(Piece):
     def __init__(self, color):
+        # ternary assignment statement in python
+        # negative values indicate an up direction in pygame, whilst positive indicates down direction
         self.dir = -1 if color == 'white' else 1
         self.en_passant = False
         super().__init__('pawn', color, 1.0)

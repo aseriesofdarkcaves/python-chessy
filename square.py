@@ -1,14 +1,15 @@
-class Square:
-    ALPHACOLS = {0: 'a', 1: 'b', 2: 'c', 3: 'd', 4: 'e', 5: 'f', 6: 'g', 7: 'h'}
+from constants import ALPHABETIC_FILE_MAP
 
-    def __init__(self, row, col, piece=None):
-        self.row = row
-        self.col = col
+
+class Square:
+
+    def __init__(self, rank, file, piece=None):
+        self.rank = rank
+        self.file = file
         self.piece = piece
-        self.alphacol = self.ALPHACOLS[col]
 
     def __eq__(self, other):
-        return self.row == other.row and self.col == other.col
+        return self.rank == other.rank and self.file == other.file
 
     def has_piece(self):
         return self.piece != None
@@ -30,10 +31,9 @@ class Square:
         for arg in args:
             if arg < 0 or arg > 7:
                 return False
-        
+
         return True
 
     @staticmethod
-    def get_alphacol(col):
-        ALPHACOLS = {0: 'a', 1: 'b', 2: 'c', 3: 'd', 4: 'e', 5: 'f', 6: 'g', 7: 'h'}
-        return ALPHACOLS[col]
+    def get_alphabetic_file_name(file):
+        return ALPHABETIC_FILE_MAP[file]

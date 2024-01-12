@@ -9,19 +9,22 @@ from move import Move
 
 class Main:
     def __init__(self):
+        # Have to do this when using pygame
         pygame.init()
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
-        pygame.display.set_caption('Chess')
+        pygame.display.set_caption(APPLICATION_NAME)
         self.game = Game()
 
-    def mainloop(self):
+    def run(self):
+        # init what you need for the program
         screen = self.screen
         game = self.game
         board = self.game.board
         dragger = self.game.dragger
 
+        # main loop
         while True:
-            # show methods
+            # methods for showing the various objects on the screen
             game.show_bg(screen)
             game.show_last_move(screen)
             game.show_moves(screen)
@@ -127,4 +130,4 @@ class Main:
 
 
 main = Main()
-main.mainloop()
+main.run()

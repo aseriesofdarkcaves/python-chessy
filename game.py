@@ -19,47 +19,47 @@ class Game:
     def show_bg(self, surface):
         theme = self.config.theme
 
-        for row in range(ROWS):
-            for col in range(COLS):
+        for rank in range(RANKS):
+            for file in range(FILES):
                 # color
-                color = theme.bg.light if (row + col) % 2 == 0 else theme.bg.dark
+                color = theme.bg.light if (rank + file) % 2 == 0 else theme.bg.dark
                 # rect
-                rect = (col * SQSIZE, row * SQSIZE, SQSIZE, SQSIZE)
+                rect = (file * SQSIZE, rank * SQSIZE, SQSIZE, SQSIZE)
                 # blit
                 pygame.draw.rect(surface, color, rect)
 
-                # row coordinates
-                if col == 0:
+                # rank coordinates
+                if file == 0:
                     # color
-                    color = theme.bg.dark if row % 2 == 0 else theme.bg.light
+                    color = theme.bg.dark if rank % 2 == 0 else theme.bg.light
                     # label
-                    lbl = self.config.font.render(str(ROWS - row), 1, color)
-                    lbl_pos = (5, 5 + row * SQSIZE)
+                    lbl = self.config.font.render(str(RANKS - rank), 1, color)
+                    lbl_pos = (5, 5 + rank * SQSIZE)
                     # blit
                     surface.blit(lbl, lbl_pos)
 
-                # col coordinates
-                if row == 7:
+                # file coordinates
+                if rank == 7:
                     # color
-                    color = theme.bg.dark if (row + col) % 2 == 0 else theme.bg.light
+                    color = theme.bg.dark if (rank + file) % 2 == 0 else theme.bg.light
                     # label
-                    lbl = self.config.font.render(Square.get_alphacol(col), 1, color)
-                    lbl_pos = (col * SQSIZE + SQSIZE - 20, HEIGHT - 20)
+                    lbl = self.config.font.render(Square.get_alphabetic_file_name(file), 1, color)
+                    lbl_pos = (file * SQSIZE + SQSIZE - 20, HEIGHT - 20)
                     # blit
                     surface.blit(lbl, lbl_pos)
 
     def show_pieces(self, surface):
-        for row in range(ROWS):
-            for col in range(COLS):
+        for rank in range(RANKS):
+            for file in range(FILES):
                 # piece ?
-                if self.board.squares[row][col].has_piece():
-                    piece = self.board.squares[row][col].piece
+                if self.board.squares[rank][file].has_piece():
+                    piece = self.board.squares[rank][file].piece
 
                     # all pieces except dragger piece
                     if piece is not self.dragger.piece:
                         piece.set_texture(size=80)
                         img = pygame.image.load(piece.texture)
-                        img_center = col * SQSIZE + SQSIZE // 2, row * SQSIZE + SQSIZE // 2
+                        img_center = file * SQSIZE + SQSIZE // 2, rank * SQSIZE + SQSIZE // 2
                         piece.texture_rect = img.get_rect(center=img_center)
                         surface.blit(img, piece.texture_rect)
 
@@ -72,9 +72,9 @@ class Game:
             # loop all valid moves
             for move in piece.moves:
                 # color
-                color = theme.moves.light if (move.final.row + move.final.col) % 2 == 0 else theme.moves.dark
+                color = theme.moves.light if (move.final.rank + move.final.file) % 2 == 0 else theme.moves.dark
                 # rect
-                rect = (move.final.col * SQSIZE, move.final.row * SQSIZE, SQSIZE, SQSIZE)
+                rect = (move.final.file * SQSIZE, move.final.rank * SQSIZE, SQSIZE, SQSIZE)
                 # blit
                 pygame.draw.rect(surface, color, rect)
 
@@ -87,9 +87,9 @@ class Game:
 
             for pos in [initial, final]:
                 # color
-                color = theme.trace.light if (pos.row + pos.col) % 2 == 0 else theme.trace.dark
+                color = theme.trace.light if (pos.rank + pos.file) % 2 == 0 else theme.trace.dark
                 # rect
-                rect = (pos.col * SQSIZE, pos.row * SQSIZE, SQSIZE, SQSIZE)
+                rect = (pos.file * SQSIZE, pos.rank * SQSIZE, SQSIZE, SQSIZE)
                 # blit
                 pygame.draw.rect(surface, color, rect)
 
@@ -98,7 +98,7 @@ class Game:
             # color
             color = (180, 180, 180)
             # rect
-            rect = (self.hovered_sqr.col * SQSIZE, self.hovered_sqr.row * SQSIZE, SQSIZE, SQSIZE)
+            rect = (self.hovered_sqr.file * SQSIZE, self.hovered_sqr.rank * SQSIZE, SQSIZE, SQSIZE)
             # blit
             pygame.draw.rect(surface, color, rect, width=3)
 
@@ -107,8 +107,8 @@ class Game:
     def next_turn(self):
         self.next_player = 'white' if self.next_player == 'black' else 'black'
 
-    def set_hover(self, row, col):
-        self.hovered_sqr = self.board.squares[row][col]
+    def set_hover(self, rank, file):
+        self.hovered_sqr = self.board.squares[rank][file]
 
     def change_theme(self):
         self.config.change_theme()
