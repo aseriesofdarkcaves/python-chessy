@@ -2,6 +2,8 @@
 
 Original code sourced from: https://github.com/AlejoG10/python-chess-ai-yt
 
+Video tutorial to match the original code: https://www.youtube.com/watch?v=OpL0Gcfn4B4
+
 - TODO: Working on AI game-mode...
 - Entry point: `main.py`
 - Press `t` to change theme (green, brown, blue, grey)
