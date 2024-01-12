@@ -1,10 +1,9 @@
 import pygame
 
-from const import *
+from constants import *
 
 
 class Dragger:
-
     def __init__(self):
         self.piece = None
         self.dragging = False
@@ -14,7 +13,6 @@ class Dragger:
         self.initial_col = 0
 
     # blit method
-
     def update_blit(self, surface):
         # texture
         self.piece.set_texture(size=128)
@@ -28,7 +26,6 @@ class Dragger:
         surface.blit(img, self.piece.texture_rect)
 
     # other methods
-
     def update_mouse(self, pos):
         self.mouseX, self.mouseY = pos  # (xcor, ycor)
 

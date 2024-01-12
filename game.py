@@ -1,6 +1,6 @@
 import pygame
 
-from const import *
+from constants import *
 from board import Board
 from dragger import Dragger
 from config import Config
@@ -8,7 +8,6 @@ from square import Square
 
 
 class Game:
-
     def __init__(self):
         self.next_player = 'white'
         self.hovered_sqr = None
@@ -17,7 +16,6 @@ class Game:
         self.config = Config()
 
     # blit methods
-
     def show_bg(self, surface):
         theme = self.config.theme
 

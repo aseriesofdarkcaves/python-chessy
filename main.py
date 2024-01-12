@@ -1,14 +1,13 @@
 import pygame
 import sys
 
-from const import *
+from constants import *
 from game import Game
 from square import Square
 from move import Move
 
 
 class Main:
-
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -16,7 +15,6 @@ class Main:
         self.game = Game()
 
     def mainloop(self):
-
         screen = self.screen
         game = self.game
         board = self.game.board
